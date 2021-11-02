@@ -13,9 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from secret_key import SECRET_KEY
 from datetime import timedelta
-# import django_on_heroku
 
-# django_on_heroku.settings(locals())
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -203,3 +201,6 @@ SIMPLE_JWT = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
+
+import django_on_heroku
+django_on_heroku.settings(locals())
