@@ -1,2 +1,2 @@
-web: gunicorn sanctuary_django_app.wsgi
+web: gunicorn Sanctuary_Capstone.wsgi
 release: python manage.py migrate

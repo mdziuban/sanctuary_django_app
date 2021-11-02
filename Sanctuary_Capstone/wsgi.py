@@ -1,5 +1,5 @@
 """
-WSGI config for Santuary_Capstone project.
+WSGI config for Sanctuary_Capstone project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Santuary_Capstone.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Sanctuary_Capstone.settings')
 
 application = get_wsgi_application()
