@@ -63,7 +63,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    'https://https://sanctaury-vue.herokuapp.com/'
+    'https://sanctaury-vue.herokuapp.com/'
     
 )
 
