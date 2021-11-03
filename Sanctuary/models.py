@@ -56,6 +56,10 @@ class Post(models.Model):
     text_content = models.CharField(max_length=200, blank=True)
     img_content = models.ImageField(blank=True)
     hashtags = models.CharField(max_length=200, blank=True)
+    user_likes = models.ManyToManyField(User)
+
+    class Meta:
+        ordering = ['created']
 
 class Reply(models.Model):
     post_id = models.ForeignKey(Post, on_delete=models.PROTECT, related_name='post')

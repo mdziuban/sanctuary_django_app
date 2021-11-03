@@ -30,6 +30,10 @@ class PostDetail(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
 
+class PostLike(generics.RetrieveUpdateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
 class ReplyList(generics.ListCreateAPIView):
     serializer_class = ReplySerializer
 
