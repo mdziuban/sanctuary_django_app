@@ -9,8 +9,8 @@ from PIL import Image
 class Player(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=500)
-    profilePic = models.ImageField(upload_to='uploads/', blank=True, null=True)
-    thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
+    profilePic = models.ImageField(upload_to='images/', blank=True, null=True)
+    thumbnail = models.ImageField(upload_to='images/', blank=True, null=True)
     suspended = models.BooleanField(default=False)
 
     def __str__(self):
@@ -18,17 +18,17 @@ class Player(models.Model):
 
     def get_image(self):
         if self.image:
-            return 'http://127.0.0.1:8000' + self.image.url
+            return 'https://sanctuary-django.herokuapp.com/' + self.image.url
         return ''
 
     def get_thumbnail(self):
         if self.thumbnail:
-            return 'http://127.0.0.1:8000' + self.thumbnail.url
+            return 'https://sanctuary-django.herokuapp.com/' + self.thumbnail.url
         else:
             if self.image:
                 self.thumbnail = self.make_thumbnail(self.image)
                 self.save()
-                return 'http://127.0.0.1:8000' + self.thumbnail.url
+                return 'https://sanctuary-django.herokuapp.com' + self.thumbnail.url
             else: 
                 return ''
     
@@ -69,9 +69,9 @@ class GameData(models.Model):
     user_id = models.ForeignKey(Player, models.PROTECT, related_name='gamedata')
 
 class SiteImages(models.Model):
-    image = models.ImageField(upload_to='uploads/', blank=True, null=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def get_image(self):
         if self.image:
-            return 'http://127.0.0.1:8000' + self.image.url
+            return 'https://sanctuary-django.herokuapp.com/' + self.image.url
         return ''
