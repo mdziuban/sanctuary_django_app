@@ -15,6 +15,7 @@ django-on-heroku = "*"
 gunicorn = "*"
 cloudinary = "*"
 django-cloudinary-storage = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
