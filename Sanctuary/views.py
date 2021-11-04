@@ -39,15 +39,13 @@ class PostDetail(generics.ListCreateAPIView):
 
 class PostLike(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
-    serializer_class = PostDetailSerializer
+    serializer_class = PostDetailSerializer(many=True)
 
     @action(methods=['delete'], detail=True)
     def removeLike(self, request):
         queryset = Post.objects.all()
-        print(queryset)
         user_id = self.request.query_params.get('user_likes')
-        print(user_id)
-        # Post.user_likes.remove(user_object)
+        queryset.user_likes.remove(user_id)
 
 class PostDelete(generics.DestroyAPIView):
     permission_classes = [IsAdminUser]
