@@ -39,7 +39,7 @@ class PostDetail(generics.ListCreateAPIView):
 
 class PostLike(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
-    serializer_class = PostDetailSerializer(many=True)
+    serializer_class = PostDetailSerializer
 
     @action(methods=['delete'], detail=True)
     def removeLike(self, request):
