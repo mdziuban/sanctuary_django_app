@@ -7,12 +7,11 @@ class PlayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Player
         fields = '__all__'
-
 class UserSerializer(serializers.ModelSerializer):
     player = PlayerSerializer(read_only=True)
     class Meta: 
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'player')
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'is_staff', 'player')
 
 
 class PostSerializer(serializers.ModelSerializer):

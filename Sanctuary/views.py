@@ -2,8 +2,8 @@ from rest_framework import generics
 from django.shortcuts import render
 from . models import Player, Post, Reply, GameData, User, SiteImages
 from .serializers import ImageSerializer, PlayerSerializer, PostSerializer, PostDetailSerializer, ReplySerializer, GameDataSerializer, UserSerializer, RegisterSerializer
-from rest_framework.permissions import AllowAny
-
+from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.decorators import action
 
 class PlayerList(generics.ListCreateAPIView):
     serializer_class = UserSerializer
@@ -18,6 +18,13 @@ class PlayerDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+class PlayerInfo(generics.ListAPIView):
+    serializer_class = UserSerializer
+
+    def return_data(self):
+        queryset = User.objects.all()
+        return queryset
+
 class PlayerUpdate(generics.RetrieveUpdateDestroyAPIView):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
@@ -30,9 +37,27 @@ class PostDetail(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
 
-class PostLike(generics.RetrieveUpdateAPIView):
+class PostLike(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostDetailSerializer
+
+    @action(methods=['delete'], detail=True)
+    def removeLike(self, request):
+        queryset = Post.objects.all()
+        print(queryset)
+        user_id = self.request.query_params.get('user_likes')
+        print(user_id)
+        # Post.user_likes.remove(user_object)
+
+class PostDelete(generics.DestroyAPIView):
+    permission_classes = [IsAdminUser]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+class ReplyDelete(generics.DestroyAPIView):
+    permission_classes = [IsAdminUser]
+    queryset = Reply.objects.all()
+    serializer_class = ReplySerializer
 
 class ReplyList(generics.ListCreateAPIView):
     serializer_class = ReplySerializer
@@ -42,6 +67,7 @@ class ReplyList(generics.ListCreateAPIView):
         post_number = self.request.query_params.get('post_id')
         queryset = queryset.filter(post_id = post_number)
         return queryset
+
 
 class ReplyAdd(generics.ListCreateAPIView):
     queryset = Reply.objects.all()
