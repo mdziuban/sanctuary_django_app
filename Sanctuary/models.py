@@ -56,7 +56,7 @@ class Post(models.Model):
     text_content = models.CharField(max_length=200, blank=True)
     img_content = models.ImageField(blank=True)
     hashtags = models.CharField(max_length=200, blank=True)
-    user_likes = models.ManyToManyField(User)
+    user_likes = models.ManyToManyField(User, blank=True)
 
     class Meta:
         ordering = ['created']
